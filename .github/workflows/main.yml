@@ -45,12 +45,16 @@ jobs:
         run: dotnet publish --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}"
       - name: Publish functional tests
         run: dotnet publish **/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}/FunctionalTests"
-      - name: Copy runsettings file
-        run: cp '**/*.runsettings' '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests'
-        shell: bash
-      - name: Copy ARM templates
-        run: cp 'ArmTemplates/' '${GITHUB_WORKSPACE}'
-        shell: bash
+      
+      # Copying throws an error. Temporary disabling Copy runsettings file step.
+      # - name: Copy runsettings file
+      #   run: cp '**/*.runsettings' '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests'
+      #  shell: bash
+      #  No need of this step for now. Temporary disabling Copy ARM templates step.
+      # - name: Copy ARM templates
+      #   run: cp 'ArmTemplates/' '${GITHUB_WORKSPACE}'
+      #   shell: bash
+
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
