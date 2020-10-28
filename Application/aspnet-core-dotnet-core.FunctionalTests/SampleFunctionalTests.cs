@@ -65,6 +65,7 @@ namespace SampleWebApplication.FunctionalTests
             var path = Environment.GetEnvironmentVariable("ChromeWebDriver");
             var options = new ChromeOptions();
             options.AddArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
 
             if (!string.IsNullOrWhiteSpace(path))
             {
