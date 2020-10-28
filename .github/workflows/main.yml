@@ -46,7 +46,7 @@ jobs:
       - name: Publish functional tests
         run: dotnet publish **/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}/FunctionalTests"
       - name: Copy runsettings file
-        run: cp '/**/*.runsettings' '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests'
+        run: cp '**/*.runsettings' '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests'
         shell: bash
       - name: Copy ARM templates
         run: cp 'ArmTemplates/' '${GITHUB_WORKSPACE}'
