@@ -9,7 +9,11 @@ on:
     branches: [ azure-pipelines ]
   pull_request:
     branches: [ azure-pipelines ]
-
+env:
+  Parameters.RestoreBuildProjects: '**/*.csproj'
+  Parameters.UnitTestProjects: '**/*UnitTests/*.csproj'
+  BuildConfiguration: Release
+  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
