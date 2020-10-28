@@ -9,6 +9,7 @@ on:
     branches: [ azure-pipelines ]
   pull_request:
     branches: [ azure-pipelines ]
+
 env:
   Parameters.RestoreBuildProjects: '**/*.csproj'
   Parameters.UnitTestProjects: '**/*UnitTests/*.csproj'
@@ -20,6 +21,10 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+        working-directory: Application
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
