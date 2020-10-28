@@ -30,11 +30,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Run a one-line script
+      - name: List working directory content
         run: ls
 
-      #- name: Restore
-      #  run: dotnet restore ${{ env.Parameters.RestoreBuildProjects }}
+      - name: Restore
+        run: dotnet restore ${{ env.Parameters.RestoreBuildProjects }}
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
