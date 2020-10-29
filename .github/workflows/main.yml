@@ -45,7 +45,7 @@ jobs:
         run: dotnet test ${{ env.UnitTestProjects }} --configuration ${{ env.BuildConfiguration }}
       
       - name: Publish
-        run: dotnet publish ${{ env.ProjectsFolder }} ${{ env.BuildConfiguration }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.PublishFolder }}
+        run: dotnet publish ${{ env.ProjectsFolder }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.PublishFolder }}
 
       - name: Publish functional tests
         run: dotnet publish ${{ env.UnitTestProjects }}/**/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ env.FunctionalTestsPublishFolder }}
