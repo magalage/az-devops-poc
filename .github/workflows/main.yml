@@ -81,8 +81,9 @@ jobs:
         run: ls ./drop/ArmTemplates
 
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v2.2.0
         with:
-          path: ./drop
+          name: az-devops-poc-build-drop
+          path: ./drop/
 
 
