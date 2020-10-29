@@ -63,10 +63,7 @@ jobs:
         run: ls ./drop/FunctionalTests
 
       - name: Copy runsettings file
-        uses: canastro/copy-action@0.0.2
-        with:
-          source: ./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings
-          target: ./drop/FunctionalTests
+        run: cp ./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings ./drop/FunctionalTests
 
       - name: List directory content
         run: ls ../ArmTemplates
