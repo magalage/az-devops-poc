@@ -51,8 +51,10 @@ jobs:
       #   run: cp '**/*.runsettings' '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests'
       #  shell: bash
       
-        - name: List directory content
+      - name: List directory content
         run: ls .
+      - name: List directory content
+        run: ls ./drop
         
       - name: List directory content
         run: ls ./aspnet-core-dotnet-core.FunctionalTests
