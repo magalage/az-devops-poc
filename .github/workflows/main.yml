@@ -48,7 +48,7 @@ jobs:
         run: dotnet publish ${{ env.ProjectsFolder }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.PublishFolder }}
 
       - name: Publish functional tests
-        run: dotnet publish ${{ env.UnitTestProjects }}/**/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ env.FunctionalTestsPublishFolder }}
+        run: dotnet publish ${{ env.FunctionalTestProjects }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.FunctionalTestsPublishFolder }}
       
       - name: Copy runsettings file
         run: cp ${{ env.FunctionalTestProjects }}/functionalTests.runsettings ${{ env.FunctionalTestsPublishFolder }}
