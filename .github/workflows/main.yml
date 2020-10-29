@@ -42,9 +42,9 @@ jobs:
         run: dotnet test ./aspnet-core-dotnet-core.UnitTests --configuration ${{ env.BuildConfiguration }}
       
       - name: Publish
-        run: dotnet publish --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}"
+        run: dotnet publish --configuration ${{ env.BuildConfiguration }} --output "./drop"
       - name: Publish functional tests
-        run: dotnet publish **/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}/FunctionalTests"
+        run: dotnet publish **/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output "./drop/FunctionalTests"
       
       # Copying throws an error. Temporary disabling Copy runsettings file step.
       # - name: Copy runsettings file
@@ -55,7 +55,7 @@ jobs:
         uses: canastro/copy-action@0.0.2
         with:
           source: "**/*.runsettings"
-          target: ${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests
+          target: ./drop/FunctionalTests
 
       #  No need of this step for now. Temporary disabling Copy ARM templates step.
       # - name: Copy ARM templates
