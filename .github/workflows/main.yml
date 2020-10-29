@@ -12,7 +12,7 @@ on:
 
 env:
   Parameters.RestoreBuildProjects: '**/*.csproj'
-  Parameters.UnitTestProjects: '**/*UnitTests/*.csproj'
+  Parameters.UnitTestProjects: './aspnet-core-dotnet-core.UnitTests'
   BuildConfiguration: Release
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
