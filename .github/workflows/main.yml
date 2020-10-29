@@ -54,8 +54,8 @@ jobs:
       - name: Copy runsettings file
         uses: canastro/copy-action@0.0.2
         with:
-          source: '**/*.runsettings'
-          target: '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests
+          source: "**/*.runsettings"
+          target: ${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests
 
       #  No need of this step for now. Temporary disabling Copy ARM templates step.
       # - name: Copy ARM templates
