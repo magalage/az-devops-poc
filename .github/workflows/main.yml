@@ -51,7 +51,7 @@ jobs:
         run: dotnet publish **/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ env.FunctionalTestsPublishFolder }}
       
       - name: Copy runsettings file
-        run: cp ${{ env.PublishFolder }}/functionalTests.runsettings ${{ env.FunctionalTestsPublishFolder }}
+        run: cp ${{ env.FunctionalTestProjects }}/functionalTests.runsettings ${{ env.FunctionalTestsPublishFolder }}
 
       - name: Copy ARM templates
         run: cp -r ../ArmTemplates/ ${{ env.PublishFolder }}
