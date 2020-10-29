@@ -75,7 +75,10 @@ jobs:
         run: cp ./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings ./drop/FunctionalTests
 
       - name: Copy ARM templates
-        run: cp ../ArmTemplates/ ./drop
+        run: cp -r ../ArmTemplates/ ./drop
+
+      - name: List directory content
+        run: ls ./drop/ArmTemplates
 
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
