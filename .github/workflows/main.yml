@@ -60,7 +60,7 @@ jobs:
         run: ls ./aspnet-core-dotnet-core.FunctionalTests
 
       - name: List directory content
-        run: ls ./drop/FunctionalTest
+        run: ls ./drop/FunctionalTests
 
       - name: Copy runsettings file
         uses: canastro/copy-action@0.0.2
