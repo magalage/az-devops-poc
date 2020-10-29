@@ -50,19 +50,11 @@ jobs:
       - name: Copy runsettings file
         run: cp ./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings ./drop/FunctionalTests
 
-      - name: Copy runsettings file
-        run: cp ./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings ./drop/FunctionalTests
-
       - name: Copy ARM templates
         run: cp -r ../ArmTemplates/ ./drop
 
-      - name: ls
-        run: ls ./drop/
-        
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
           name: az-devops-poc-build-drop
           path: ./Application/drop/
-
-
