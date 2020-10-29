@@ -37,10 +37,9 @@ jobs:
       - name: Build
         run: dotnet build ${{ env.Parameters.RestoreBuildProjects }} --configuration ${{ env.BuildConfiguration }}
       
-      # Functional test throws an error. Temporary disabling Test step.
+      # Had to provide the Unittest project folder to run only unit tests in this step. It does not take global patterns like in Azure DevOps pipeline
       - name: Test
         run: dotnet test ./aspnet-core-dotnet-core.UnitTests --configuration ${{ env.BuildConfiguration }}
-        #run: dotnet test ${{ env.Parameters.UnitTestProjects }} --configuration ${{ env.BuildConfiguration }}
       
       - name: Publish
         run: dotnet publish --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}"
@@ -51,6 +50,13 @@ jobs:
       # - name: Copy runsettings file
       #   run: cp '**/*.runsettings' '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests'
       #  shell: bash
+      
+      - name: Copy runsettings file
+        uses: canastro/copy-action@0.0.2
+        with:
+          source: '**/*.runsettings'
+          target: '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests
+
       #  No need of this step for now. Temporary disabling Copy ARM templates step.
       # - name: Copy ARM templates
       #   run: cp 'ArmTemplates/' '${GITHUB_WORKSPACE}'
