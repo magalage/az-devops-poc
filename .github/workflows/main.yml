@@ -63,6 +63,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: az-devops-poc-build-drop
-          path: ./drop/
+          path: ./Application/drop/
 
 
