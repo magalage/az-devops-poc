@@ -54,6 +54,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: az-devops-poc-build-drop
-          # upload-artifact@v2 doesn't resolve default working folder setting. Needs to provide path from the repo root
           path: ${{ env.PublishFolder }}
 
