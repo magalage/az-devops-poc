@@ -12,7 +12,7 @@ on:
 
 env:
   Parameters.RestoreBuildProjects: '**/*.csproj'
-  Parameters.UnitTestProjects: './aspnet-core-dotnet-core.UnitTests'
+  Parameters.UnitTestProjects: 'aspnet-core-dotnet-core.UnitTests'
   BuildConfiguration: Release
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -39,8 +39,7 @@ jobs:
       
       # Functional test throws an error. Temporary disabling Test step.
       - name: Test
-        working-directory: ${{ env.Parameters.UnitTestProjects }}
-        run: dotnet test --configuration ${{ env.BuildConfiguration }}
+        run: dotnet test ${{ env.Parameters.UnitTestProjects }} --configuration ${{ env.BuildConfiguration }}
       
       - name: Publish
         run: dotnet publish --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}"
