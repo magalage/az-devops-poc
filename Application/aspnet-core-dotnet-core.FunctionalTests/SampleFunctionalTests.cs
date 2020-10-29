@@ -65,7 +65,6 @@ namespace SampleWebApplication.FunctionalTests
             var path = Environment.GetEnvironmentVariable("ChromeWebDriver");
             var options = new ChromeOptions();
             options.AddArguments("--no-sandbox");
-            //options.AddArguments("--headless");
 
             if (!string.IsNullOrWhiteSpace(path))
             {
