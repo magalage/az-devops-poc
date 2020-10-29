@@ -1,12 +1,13 @@
 # This action workflow is based on Azure DevOps Pipeline YAML
+# It's required to implement proper github workflow to prompt build/test results for the reviewer when do a PR
 
 name: CI
 
 on:
-  push:
+  push: 
     branches: [ master ]
   pull_request:
-    branches: [ azure-pipelines ]
+    branches: [ master ]
 
 env:
   # Unlike Azure DevOps pipeline YAML, dotnet cli commands used here in Actions does not take global patters like ('**/*.csproj') 
@@ -55,3 +56,4 @@ jobs:
           name: az-devops-poc-build-drop
           # upload-artifact@v2 doesn't resolve default working folder setting. Needs to provide path from the repo root
           path: ${{ env.PublishFolder }}
+
