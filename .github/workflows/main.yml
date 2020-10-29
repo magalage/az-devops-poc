@@ -30,10 +30,10 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: List working directory content
-        run: ls
+
       - name: Restore
         run: dotnet restore ${{ env.Parameters.RestoreBuildProjects }}
+      
       - name: Build
         run: dotnet build ${{ env.Parameters.RestoreBuildProjects }} --configuration ${{ env.BuildConfiguration }}
       
@@ -43,43 +43,22 @@ jobs:
       
       - name: Publish
         run: dotnet publish --configuration ${{ env.BuildConfiguration }} --output "./drop"
+
       - name: Publish functional tests
         run: dotnet publish **/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output "./drop/FunctionalTests"
       
-      # Copying throws an error. Temporary disabling Copy runsettings file step.
-      # - name: Copy runsettings file
-      #   run: cp '**/*.runsettings' '${{ env.Build.ArtifactStagingDirectory }}/FunctionalTests'
-      #  shell: bash
-      
-      - name: List directory content
-        run: ls .
-      - name: List directory content
-        run: ls ./drop
-        
-      - name: List directory content
-        run: ls ./aspnet-core-dotnet-core.FunctionalTests
-
-      - name: List directory content
-        run: ls ./drop/FunctionalTests
-
       - name: Copy runsettings file
         run: cp ./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings ./drop/FunctionalTests
 
-      - name: List directory content
-        run: ls ../ArmTemplates
-        
-      #  No need of this step for now. Temporary disabling Copy ARM templates step.
-      #- name: Copy ARM templates
-      #  run: cp 'ArmTemplates/' '${GITHUB_WORKSPACE}'
       - name: Copy runsettings file
         run: cp ./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings ./drop/FunctionalTests
 
       - name: Copy ARM templates
         run: cp -r ../ArmTemplates/ ./drop
 
-      - name: List directory content
-        run: ls ./drop/ArmTemplates
-
+      - name: ls
+        run: ls ./drop/
+        
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.0
         with:
