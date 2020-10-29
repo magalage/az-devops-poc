@@ -39,7 +39,8 @@ jobs:
       
       # Functional test throws an error. Temporary disabling Test step.
       - name: Test
-        run: dotnet test ${{ env.Parameters.UnitTestProjects }} --configuration ${{ env.BuildConfiguration }}
+        working-directory: ${{ env.Parameters.UnitTestProjects }}
+        run: dotnet test --configuration ${{ env.BuildConfiguration }}
       
       - name: Publish
         run: dotnet publish --configuration ${{ env.BuildConfiguration }} --output "${GITHUB_WORKSPACE}"
