@@ -54,17 +54,22 @@ jobs:
       - name: Copy runsettings file
         uses: canastro/copy-action@0.0.2
         with:
-          source: "**/*.runsettings"
+          source: "./aspnet-core-dotnet-core.FunctionalTests/functionalTests.runsettings"
           target: ./drop/FunctionalTests
 
       #  No need of this step for now. Temporary disabling Copy ARM templates step.
-      # - name: Copy ARM templates
-      #   run: cp 'ArmTemplates/' '${GITHUB_WORKSPACE}'
-      #   shell: bash
+      #- name: Copy ARM templates
+      #  run: cp 'ArmTemplates/' '${GITHUB_WORKSPACE}'
+      - name: Copy runsettings file
+        uses: canastro/copy-action@0.0.2
+        with:
+          source: ../ArmTemplates
+          target: ./drop
+        
 
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
         with:
-          path: ${GITHUB_WORKSPACE}
+          path: ./drop
 
 
