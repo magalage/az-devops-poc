@@ -11,7 +11,7 @@ on:
     branches: [ azure-pipelines ]
 
 env:
-  BuildProjects: './Application'
+  ProjectsFolder: './Application'
   UnitTestProjects: './Application/aspnet-core-dotnet-core.UnitTests'
   FunctionalTestProjects: './Application/aspnet-core-dotnet-core.FunctionalTests'
   BuildConfiguration: Release
@@ -38,23 +38,23 @@ jobs:
         run: dotnet restore ${{ env.BuildProjects }}
       
       - name: Build
-        run: dotnet build ${{ env.BuildProjects }} --configuration ${{ env.BuildConfiguration }}
+        run: dotnet build ${{ env.ProjectsFolder }} --configuration ${{ env.BuildConfiguration }}
       
       # We need to run only the unit tests here. Provded the unit test folder. It does not take global patterns like in Azure DevOps pipeline
       - name: Test
         run: dotnet test ${{ env.UnitTestProjects }} --configuration ${{ env.BuildConfiguration }}
       
       - name: Publish
-        run: dotnet publish ${{ env.BuildConfiguration }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.PublishFolder }}
+        run: dotnet publish ${{ env.ProjectsFolder }} ${{ env.BuildConfiguration }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.PublishFolder }}
 
       - name: Publish functional tests
-        run: dotnet publish **/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ env.FunctionalTestsPublishFolder }}
+        run: dotnet publish ${{ env.UnitTestProjects }}/**/*FunctionalTest*.csproj --configuration ${{ env.BuildConfiguration }} --output ${{ env.FunctionalTestsPublishFolder }}
       
       - name: Copy runsettings file
         run: cp ${{ env.FunctionalTestProjects }}/functionalTests.runsettings ${{ env.FunctionalTestsPublishFolder }}
 
       - name: Copy ARM templates
-        run: cp -r./ArmTemplates/ ${{ env.PublishFolder }}
+        run: cp -r ./ArmTemplates/ ${{ env.PublishFolder }}
 
       - name: Publish Artifact
         uses: actions/upload-artifact@v2
