@@ -1,0 +1,57 @@
+# This action workflow is based on Azure DevOps Pipeline YAML
+
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ azure-pipelines ]
+
+env:
+  # Unlike Azure DevOps pipeline YAML, dotnet cli commands used here in Actions does not take global patters like ('**/*.csproj') 
+  # Added following path variables instead
+  ProjectsFolder: './Application'
+  UnitTestProjects: './Application/aspnet-core-dotnet-core.UnitTests'
+  FunctionalTestProjects: './Application/aspnet-core-dotnet-core.FunctionalTests'
+  BuildConfiguration: Release
+  PublishFolder: './Application/drop'
+  FunctionalTestsPublishFolder: './Application/drop/FunctionalTests'
+  
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Restore
+        run: dotnet restore ${{ env.ProjectsFolder }}
+      
+      - name: Build
+        run: dotnet build ${{ env.ProjectsFolder }} --configuration ${{ env.BuildConfiguration }}
+      
+      - name: Test
+        run: dotnet test ${{ env.UnitTestProjects }} --configuration ${{ env.BuildConfiguration }}
+      
+      - name: Publish
+        run: dotnet publish ${{ env.ProjectsFolder }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.PublishFolder }}
+
+      - name: Publish functional tests
+        run: dotnet publish ${{ env.FunctionalTestProjects }} --configuration ${{ env.BuildConfiguration }} --output ${{ env.FunctionalTestsPublishFolder }}
+      
+      - name: Copy runsettings file
+        run: cp ${{ env.FunctionalTestProjects }}/functionalTests.runsettings ${{ env.FunctionalTestsPublishFolder }}
+
+      - name: Copy ARM templates
+        run: cp -r ./ArmTemplates/ ${{ env.PublishFolder }}
+
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: az-devops-poc-build-drop
+          # upload-artifact@v2 doesn't resolve default working folder setting. Needs to provide path from the repo root
+          path: ${{ env.PublishFolder }}
