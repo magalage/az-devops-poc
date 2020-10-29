@@ -4,10 +4,10 @@
 name: CI
 
 on:
-  push:
+  push: 
     branches: [ master ]
   pull_request:
-    branches: [ azure-pipelines ]
+    branches: [ master ]
 
 env:
   # Unlike Azure DevOps pipeline YAML, dotnet cli commands used here in Actions does not take global patters like ('**/*.csproj') 
