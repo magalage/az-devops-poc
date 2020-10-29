@@ -60,9 +60,9 @@ jobs:
         run: ls ./drop/
         
       - name: Publish Artifact
-        uses: actions/upload-artifact@v2.2.0
+        uses: actions/upload-artifact@v2
         with:
           name: az-devops-poc-build-drop
-          path: ./drop/*
+          path: ./drop/
 
 
