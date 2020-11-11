@@ -41,7 +41,9 @@ jobs:
           #args: # optional
           # Set the sonar.projectBaseDir analysis property
           projectBaseDir: ${{ env.ProjectsFolder }} # optional, default is .
-
+          args: >
+            -Dsonar.organization=xp5ddreamgit
+            -Dsonar.projectKey=xp5ddreamgit_az-devops-poc
 
       - name: Restore
         run: dotnet restore ${{ env.ProjectsFolder }}
