@@ -19,7 +19,11 @@ jobs:
 
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
+      - name: modify file content
         env:
           codeline: "export const environment = {production: false, skipAuthentication: true, useProdConfiguration: false};"
         run: echo ./environment.prod.ts > ${{env.codeline}}
+
+      # Runs a single command using the runners shell
+      - name: new file content
+        run: cat ./environment.prod.ts
