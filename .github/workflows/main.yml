@@ -33,6 +33,27 @@ jobs:
       - name: Restore
         run: dotnet restore ${{ env.ProjectsFolder }}
       
+
+      - name: SonarQube Scan
+        # You may pin to the exact commit or the version.
+        # uses: kitabisa/sonarqube-action@a40c5bc8f6f33b9e0d5035caf5910807ce1d554d
+        uses: kitabisa/sonarqube-action@v1.1.0
+        with:
+          # SonarQube server URL
+          host: http://sonarqube-alb1-71625946.us-east-1.elb.amazonaws.com
+          # The project's unique key. Allowed characters are: letters, numbers, -, _, . and :, with at least one non-digit.
+          projectKey: az-devops-poc # optional, default is 
+          # Name of the project that will be displayed on the web interface.
+          projectName: az-devops-poc-project # optional, default is 
+          # The project version.
+          # projectVersion: # optional, default is 
+          # Set the sonar.projectBaseDir analysis property
+          projectBaseDir: ${{ env.ProjectsFolder }} # optional, default is .
+          # Login or authentication token of a SonarQube user
+          login: 073e015804ab2a4226521229e262445d1ded3e9c
+          # Password that goes with the sonar.login username. This should be left blank if an authentication token is being used.
+          # password: # optional
+      
       - name: Build
         run: dotnet build ${{ env.ProjectsFolder }} --configuration ${{ env.BuildConfiguration }}
       
