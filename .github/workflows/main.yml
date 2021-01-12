@@ -42,9 +42,9 @@ jobs:
           # SonarQube server URL
           host: http://sonarqube-alb1-71625946.us-east-1.elb.amazonaws.com
           # The project's unique key. Allowed characters are: letters, numbers, -, _, . and :, with at least one non-digit.
-          projectKey: az-devops-poc # optional, default is 
+          projectKey: az-devops-poc-2 # optional, default is 
           # Name of the project that will be displayed on the web interface.
-          projectName: az-devops-poc-project # optional, default is 
+          projectName: az-devops-poc-project-2 # optional, default is 
           # The project version.
           # projectVersion: # optional, default is 
           # Set the sonar.projectBaseDir analysis property
